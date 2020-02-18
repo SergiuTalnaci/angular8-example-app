@@ -1,0 +1,15 @@
+describe('Testing Thor from clickable list', function() {
+  it('Vists the landing page, navigates to detail page and navigates back', function() {
+    cy.visit('')
+    cy.visit('http://localhost:4200')
+    cy.contains('Thor').click()
+    cy.url().should('include', 'heroes/o0OFH4ddtfekOwK3ZKds')
+    cy.contains('Hero detail')
+    cy.get('[data-e2e="back-button"]').click()
+    cy.get('h1').first().should('have.text', 'Heroes most liked')
+    cy.get('[data-e2e="search-input"]').click()
+    cy.get('[data-e2e="search-input"]').should('have.focus')
+    cy.get('[data-e2e="search-input"]').click().type('Iron man')
+    cy.get('[data-e2e="search-options"]').first().click()
+  })
+})
